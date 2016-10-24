@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  simple-calc
 //
-//  Created by iGuest on 10/24/16.
+//  Created by Yulong on 10/24/16.
 //  Copyright © 2016 yulongproductions. All rights reserved.
 //
 
@@ -59,5 +59,47 @@ class ViewController: UIViewController {
     @IBAction func clear(_ sender: AnyObject) {
         display.text = ""
     }
+    
+    // Math operations
+    func add(left: Int, right: Int) -> Int {
+        return left + right;
+    }
+    
+    func subtract(left: Int, right: Int) -> Int {
+        return left - right;
+    }
+    
+    func multiply(left: Int, right: Int) -> Int {
+        return left * right;
+    }
+    
+    func divide(left: Int, right: Int) -> Int {
+        return left / right;
+    }
+    
+    // Advanced operations
+    
+    func count(array: [Int]) -> Int {
+        return array.count
+    }
+    
+    func average(array: [Int]) -> Int {
+        var sum = 0
+        for i in 0...array.count {
+            sum += array[i]
+        }
+        return sum / array.count
+    }
+    
+    func fact(num: Int) -> Int {
+        if (num < 0) {
+            return -1
+        } else if (num == 0 || num == 1) {
+            return 1;
+        } else {
+            return num * fact(num: (num - 1));
+        }
+    }
+
 }
 
