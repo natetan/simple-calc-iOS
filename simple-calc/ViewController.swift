@@ -9,7 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    public var currentText = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,9 +22,11 @@ class ViewController: UIViewController {
     }
 
     @IBOutlet weak var display: UITextView!
+    
 
     @IBAction func number1(_ sender: AnyObject) {
-        display.text = String(1)
+        currentText += String(1)
+        display.text = currentText
     }
     @IBAction func number2(_ sender: AnyObject) {
         display.text = String(2)
@@ -57,6 +60,7 @@ class ViewController: UIViewController {
         display.text = String(9)
     }
     @IBAction func clear(_ sender: AnyObject) {
+        currentText = ""
         display.text = ""
     }
     
