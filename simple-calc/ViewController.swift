@@ -24,44 +24,103 @@ class ViewController: UIViewController {
     @IBOutlet weak var display: UITextView!
     
 
+    @IBAction func number0(_ sender: AnyObject) {
+        currentText += "0"
+        display.text = currentText
+    }
+    
     @IBAction func number1(_ sender: AnyObject) {
-        currentText += String(1)
+        currentText += "1"
         display.text = currentText
     }
     @IBAction func number2(_ sender: AnyObject) {
-        display.text = String(2)
+        currentText += "2"
+        display.text = currentText
     }
     
     @IBAction func number3(_ sender: AnyObject) {
-        display.text = String(3)
+        currentText += "3"
+        display.text = currentText
     }
-
+    
     @IBAction func number4(_ sender: AnyObject) {
-        display.text = String(4)
+        currentText += "4"
+        display.text = currentText
     }
     
     @IBAction func number5(_ sender: AnyObject) {
-        display.text = String(5)
+        currentText += "5"
+        display.text = currentText
     }
     
     @IBAction func number6(_ sender: AnyObject) {
-        display.text = String(6)
+        currentText += "6"
+        display.text = currentText
     }
     
     @IBAction func number7(_ sender: AnyObject) {
-        display.text = String(7)
+        currentText += "7"
+        display.text = currentText
     }
     
     @IBAction func number8(_ sender: AnyObject) {
-        display.text = String(8)
+        currentText += "8"
+        display.text = currentText
     }
     
     @IBAction func number9(_ sender: AnyObject) {
-        display.text = String(9)
+        currentText += "9"
+        display.text = currentText
     }
+    
+    @IBAction func plus(_ sender: AnyObject) {
+        currentText += " + "
+        display.text = currentText
+    }
+
+    @IBAction func minus(_ sender: AnyObject) {
+        currentText += " - "
+        display.text = currentText
+    }
+    
+    @IBAction func times(_ sender: AnyObject) {
+        currentText += " x "
+        display.text = currentText
+    }
+    
+    @IBAction func div(_ sender: AnyObject) {
+        currentText += " / "
+        display.text = currentText
+    }
+    
+    @IBAction func mods(_ sender: AnyObject) {
+        currentText += " % "
+        display.text = currentText
+    }
+    
     @IBAction func clear(_ sender: AnyObject) {
         currentText = ""
         display.text = ""
+    }
+    
+    @IBAction func calc(_ sender: AnyObject) {
+        var parts : Array = currentText.components(separatedBy: " ")
+        let first = Int(parts[0])
+        let op = String(parts[1])
+        let last = Int(parts[2])
+        
+        if (op == "+") {
+            display.text = String(add(left: first!, right: last!))
+        } else if (op == "-") {
+            display.text = String(subtract(left: first!, right: last!))
+        } else if (op == "x") {
+            display.text = String(multiply(left: first!, right: last!))
+        } else if (op == "/") {
+            display.text = String(divide(left: first!, right: last!))
+        } else {
+            display.text = String(mod(left: first!, right: last!))
+        }
+        currentText = ""
     }
     
     // Math operations
@@ -79,6 +138,10 @@ class ViewController: UIViewController {
     
     func divide(left: Int, right: Int) -> Int {
         return left / right;
+    }
+    
+    func mod(left: Int, right: Int) -> Int {
+        return left % right;
     }
     
     // Advanced operations
