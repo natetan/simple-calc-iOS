@@ -15,15 +15,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     @IBOutlet weak var display: UITextView!
     
-
+    
     @IBAction func number0(_ sender: AnyObject) {
         currentText += "0"
         display.text = currentText
@@ -77,7 +77,7 @@ class ViewController: UIViewController {
         currentText += " + "
         display.text = currentText
     }
-
+    
     @IBAction func minus(_ sender: AnyObject) {
         currentText += " - "
         display.text = currentText
@@ -98,6 +98,21 @@ class ViewController: UIViewController {
         display.text = currentText
     }
     
+    @IBAction func countClick(_ sender: AnyObject) {
+        currentText += " count "
+        display.text = currentText
+    }
+    
+    @IBAction func avgClick(_ sender: AnyObject) {
+        currentText += " avg "
+        display.text = currentText
+    }
+    
+    @IBAction func factClick(_ sender: AnyObject) {
+        currentText += " fact "
+        display.text = currentText
+    }
+    
     @IBAction func clear(_ sender: AnyObject) {
         currentText = ""
         display.text = ""
@@ -109,6 +124,8 @@ class ViewController: UIViewController {
         let op = String(parts[1])
         let last = Int(parts[2])
         
+        
+        
         if (op == "+") {
             display.text = String(add(left: first!, right: last!))
         } else if (op == "-") {
@@ -117,10 +134,29 @@ class ViewController: UIViewController {
             display.text = String(multiply(left: first!, right: last!))
         } else if (op == "/") {
             display.text = String(divide(left: first!, right: last!))
-        } else {
+        } else if (op == "%") {
             display.text = String(mod(left: first!, right: last!))
+            
+        } else if (currentText.contains("avg")) {
+            let parts = currentText.components(separatedBy: " avg ")
+            display.text = String(average(array: intify(array: parts)))
+        } else if (currentText.contains("count")) {
+            let parts = currentText.components(separatedBy: " count ")
+            display.text = String(count(array: intify(array: parts)))
+        } else { // fact
+            var parts = currentText.components(separatedBy: " fact ")
+            display.text = String(fact(num: Int(parts[0])!))
         }
+        
         currentText = ""
+    }
+    
+    func intify(array: [String]) -> [Int] {
+        var newArray: [Int] = []
+        for i in 0...array.count - 1 {
+            newArray.append(Int(array[i])!)
+        }
+        return newArray
     }
     
     // Math operations
@@ -152,7 +188,7 @@ class ViewController: UIViewController {
     
     func average(array: [Int]) -> Int {
         var sum = 0
-        for i in 0...array.count {
+        for i in 0...array.count - 1 {
             sum += array[i]
         }
         return sum / array.count
@@ -167,6 +203,6 @@ class ViewController: UIViewController {
             return num * fact(num: (num - 1));
         }
     }
-
+    
 }
 
